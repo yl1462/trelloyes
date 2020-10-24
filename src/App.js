@@ -13,7 +13,7 @@ const newRandomCard = () => {
 }
 
 function omit(obj, keyToOmit) {
-  let {[keyToOmit]: _, ...rest} = obj;
+  let { [keyToOmit]: _, ...rest } = obj;
   return rest;
 }
 
@@ -36,34 +36,52 @@ class App extends Component {
     }
   }
 
-state = {
-  lists: this.props.store.lists,
-  allCards: this.props.store.allCards,
-}
-
-handleAddCard = (id) => {
-  let newCard = newRandomCard()
-  let cardId = newCard.id
-  const allCards = {
-    ...this.state.allCards,
-    [cardId]: newCard
+  state = {
+    lists: this.props.store.lists,
+    allCards: this.props.store.allCards,
   }
-  let lists = this.state.lists.map((list) => {
-    if (list.id === id) {
-      list.cardIds.push(cardId)
-      return list
-    }
-    return list
-  })
 
-  this.setState({
-    lists,
-    allCards
-  })
-}
+  handleAddCard = (id) => {
+    let newCard = newRandomCard()
+    let cardId = newCard.id
+    const allCards = {
+      ...this.state.allCards,
+      [cardId]: newCard
+    }
+    let lists = this.state.lists.map((list) => {
+      if (list.id === id) {
+        list.cardIds.push(cardId)
+        return list
+      }
+      return list
+    })
+
+    this.setState({
+      lists,
+      allCards
+    })
+  }
+
+  handleDeleteCard = (cardId) => {
+    const { lists, allCards } = this.state.store;
+
+    const newLists = lists.map(list => ({
+      ...list,
+      cardIds: list.cardIds.filter(id => id !== cardId)
+    }));
+
+    const newCards = omit(allCards, cardId);
+
+    this.setState({
+      store: {
+        lists: newLists,
+        allCards: newCards
+      }
+    })
+  };
 
   render() {
-    const {lists, allCards} = this.state
+    const { lists, allCards } = this.state
     return (
       <main className='App'>
         <header className='App-header'>
@@ -78,7 +96,7 @@ handleAddCard = (id) => {
               cards={list.cardIds.map(id => allCards[id])}
               onClickDelete={this.handleDeleteCard}
               onClickAdd={this.handleAddCard}
-              />
+            />
           ))}
         </div>
       </main>
