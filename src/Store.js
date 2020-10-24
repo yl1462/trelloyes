@@ -1,25 +1,30 @@
 export default {
   lists: [
     {
-      id: '1',
-      header: 'First list',
-      cardIds: [ 'a', 'b', 'e', 'f', 'g', 'j', 'l', 'm' ],
-    },
-    {
-      id: '2',
-      header: 'Second list',
-      cardIds: ['b', 'c', 'd', 'f', 'h', 'i', 'k'],
-    },
-    {
-      id: '3',
-      header: 'Third list',
-      cardIds: [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm' ],
-    },
-    {
-      id: '4',
-      header: 'Fourth list',
-      cardIds: [ 'l', 'm' ],
-    },
+        id: '1',
+        header: 'First list',
+        cardIds: [ 'a'],
+      },
+    // {
+    //   id: '1',
+    //   header: 'First list',
+    //   cardIds: [ 'a', 'b', 'e', 'f', 'g', 'j', 'l', 'm' ],
+    // },
+    // {
+    //   id: '2',
+    //   header: 'Second list',
+    //   cardIds: ['b', 'c', 'd', 'f', 'h', 'i', 'k'],
+    // },
+    // {
+    //   id: '3',
+    //   header: 'Third list',
+    //   cardIds: [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm' ],
+    // },
+    // {
+    //   id: '4',
+    //   header: 'Fourth list',
+    //   cardIds: [ 'l', 'm' ],
+    // },
   ],
   allCards: {
     'a': { id: 'a', title: 'First card', content: 'lorem ipsum' },

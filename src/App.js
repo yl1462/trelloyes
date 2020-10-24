@@ -36,20 +36,46 @@ class App extends Component {
     }
   }
 
+state = {
+  lists: this.props.store.lists,
+  allCards: this.props.store.allCards,
+}
+
+handleAddCard = (id) => {
+  let newCard = newRandomCard()
+  let cardId = newCard.id
+  const allCards = {
+    ...this.state.allCards,
+    [cardId]: newCard
+  }
+  let lists = this.state.lists.map((list) => {
+    if (list.id === id) {
+      list.cardIds.push(cardId)
+      return list
+    }
+    return list
+  })
+
+  this.setState({
+    lists,
+    allCards
+  })
+}
+
   render() {
-    const {store} = this.props
+    const {lists, allCards} = this.state
     return (
       <main className='App'>
         <header className='App-header'>
           <h1>Trelloyes!</h1>
         </header>
         <div className='App-list'>
-          {store.lists.map(list => (
+          {lists.map(list => (
             <List
               key={list.id}
               id={list.id}
               header={list.header}
-              cards={list.cardIds.map(id => store.allCards[id])}
+              cards={list.cardIds.map(id => allCards[id])}
               onClickDelete={this.handleDeleteCard}
               onClickAdd={this.handleAddCard}
               />
